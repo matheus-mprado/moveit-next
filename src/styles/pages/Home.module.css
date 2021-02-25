@@ -15,12 +15,13 @@
     gap:6.25rem;
     align-content: center;
     margin:4rem 0rem;
+    padding-bottom: 4rem;
 }
 
 @media(max-width:768px){
     .container section{
         grid-template-columns: auto;
         gap:4rem;
-        padding-bottom: 4rem;
+        
     }
 }
