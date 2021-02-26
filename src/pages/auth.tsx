@@ -22,7 +22,7 @@ export default function Auth(){
             code: code,
         }
 
-        const req = await fetch(`http://github.com/login/oauth/authorize`,{
+        const req = await fetch(`https://github.com/login/oauth/authorize`,{
             method:'POST',
             headers:{
                 Accept: 'application/json',
