@@ -1,6 +1,6 @@
 import React from 'react';
-import { Router, useRouter } from 'next/router';
-import { ReactNode, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { ReactNode } from 'react';
 
 interface AuthData{
     request:ReactNode;
