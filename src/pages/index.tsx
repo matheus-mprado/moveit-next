@@ -5,10 +5,10 @@ import {RiArrowRightLine as RightArrow} from 'react-icons/ri';
 export default function Login(){
   
 
-  const clientId = 'f48e3c48965bbf6160e4';
+  
 
   function linkAuthGit(){
-   window.open(`https://github.com/login/oauth/authorize?client_id=${clientId}`,'_blank');
+   window.open(`https://github.com/login/oauth/authorize?client_id=${clientId}`);
   }
 
   return(
