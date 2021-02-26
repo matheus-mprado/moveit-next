@@ -1,7 +1,16 @@
 import styles from '../styles/pages/Login.module.css';
 import {RiArrowRightLine as RightArrow} from 'react-icons/ri';
 
+
 export default function Login(){
+  
+
+  const clientId = 'f48e3c48965bbf6160e4';
+
+  function linkAuthGit(){
+   window.open(`https://github.com/login/oauth/authorize?client_id=${clientId}`,'_blank');
+  }
+
   return(
       <div className={styles.loginContainer}>
         <img src="/logo-icon.svg" style={{fill:"#fff"}} alt="logo moveit"/>
@@ -18,7 +27,7 @@ export default function Login(){
             <div>
               <span>Entrar com Github</span>
             </div>
-            <button><RightArrow/></button>
+            <button onClick={linkAuthGit}><RightArrow/></button>
           </div>
         </div>
       </div>
