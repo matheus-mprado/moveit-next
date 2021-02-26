@@ -9,12 +9,14 @@ interface AuthData{
 export default function Auth(){
 
 
-    async function getAuth ({request,response}:AuthData) {
-        await fetch(`/auth`)
-        .then((response)=>{
-          return response.json();
-        })
-      }
+    const getAuth = async () => {
+        const res = await fetch(`/auth`);
+
+        const json = res.json();
+
+        console.log(json);
+        
+    }
 
     return(
         <h1>123</h1>
