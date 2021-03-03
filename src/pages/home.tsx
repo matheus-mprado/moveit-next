@@ -11,9 +11,10 @@ import { ChallengeBox } from '../components/ChallengeBox';
 import styles from '../styles/pages/Home.module.css';
 import { CountdownProvider } from '../contexts/CountdownContext';
 import { ChallengesProvider } from '../contexts/ChallengesContext';
-import { useEffect } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 import {useSession } from "next-auth/client";
+import { Sidebar } from '../components/Sidebar';
 
 interface HomeProps{
   level: number;
@@ -24,50 +25,60 @@ interface HomeProps{
 
 export default function Home(props:HomeProps) {
 
-  const [session,loading] = useSession()
-  const router = useRouter();
+    const [session,loading] = useSession()
+    const router = useRouter();
 
-  if(loading){
-    return ''
-  }
-  
-  useEffect(()=>{
-    if(!session){
-      router.push('/');
+
+    if(loading){
+      return ''
     }
-  },[])
+
+    
+    useEffect(()=>{
+      if(!session){
+        router.push('/');
+      }
+    },[])
 
   return (
     <ChallengesProvider 
-      level={props.level} 
-      currentExperience={props.currentExperience}
-      challengesCompleted={props.challengesCompleted}
-      oldExperience={props.oldExperience}
+        level={props.level} 
+        currentExperience={props.currentExperience}
+        challengesCompleted={props.challengesCompleted}
+        oldExperience={props.oldExperience}
     >
-      <div className={styles.container}>
+        <div className={styles.sidebarContainer}>
 
-        <Head>
-          <title>Início | move.it</title>
-        </Head>
 
-        <ExperienceBar/>
+                <Sidebar/>
 
-        <CountdownProvider>
-          <section>
-            <div>
-              <Profile/>
-              <CompletedChallenges/>
-              <Countdown/>
+            <div className={styles.container}>
+
+            <Head>
+                <title>Início | move.it</title>
+            </Head>
+
+            <ExperienceBar/>
+
+            <CountdownProvider>
+                <section>
+                    <div>
+                        <Profile/>
+                        <CompletedChallenges/>
+                        <Countdown/>
+                    </div>
+
+                    <div>
+                        <ChallengeBox/>
+                    </div>
+                </section>
+            </CountdownProvider>
+
             </div>
-
-            <div>
-              <ChallengeBox/>
-            </div>
-          </section>
-        </CountdownProvider>
-      </div>
-    </ChallengesProvider>
-  )
+        </div>
+        </ChallengesProvider>
+        
+    )
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
