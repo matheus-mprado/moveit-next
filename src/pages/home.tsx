@@ -33,7 +33,7 @@ export default function Home(props:HomeProps) {
   
   useEffect(()=>{
     if(!session){
-      router.push('./');
+      router.push('/');
     }
   },[])
 
