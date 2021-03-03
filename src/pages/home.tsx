@@ -13,6 +13,8 @@ import { CountdownProvider } from '../contexts/CountdownContext';
 import { ChallengesProvider } from '../contexts/ChallengesContext';
 import { useEffect } from 'react';
 
+import {useSession } from "next-auth/client";
+
 interface HomeProps{
   level: number;
   currentExperience: number;
@@ -20,19 +22,20 @@ interface HomeProps{
   oldExperience:number;
 }
 
-
-const useUser = () => ({user:null,loading:false})
-
 export default function Home(props:HomeProps) {
 
-  const {user,loading} = useUser();
+  const [session,loading] = useSession()
   const router = useRouter();
 
+  if(loading){
+    return ''
+  }
+  
   useEffect(()=>{
-    if(!(user || loading)){
+    if(!session){
       router.push('./');
     }
-  },[user,loading])
+  },[])
 
   return (
     <ChallengesProvider 

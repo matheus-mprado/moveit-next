@@ -1,15 +1,25 @@
+import { signIn, signOut, useSession } from "next-auth/client";
+
 import styles from '../styles/pages/Login.module.css';
 import {RiArrowRightLine as RightArrow} from 'react-icons/ri';
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 
 export default function Login(){
-  
 
-  const clientId = 'f48e3c48965bbf6160e4';
+  const [session,loading] = useSession()
+  const router = useRouter();
 
-  function linkAuthGit(){
-   window.open(`https://github.com/login/oauth/authorize?client_id=${clientId}`);
+  if(loading){
+    return ''
   }
+
+  useEffect(() => {
+    if(session){
+      router.push('./home');
+    }
+  }, [])
 
   return(
       <div className={styles.loginContainer}>
@@ -23,12 +33,25 @@ export default function Login(){
             <p>Faça login com seu Github<br/> para começar</p>
           </div>
           
-          <div className={styles.buttonLogin}>
-            <div>
-              <span>Entrar com Github</span>
+          {!session && (
+            <div className={styles.buttonLogin}>
+              <div>
+                <span>Entrar com Github</span>
+              </div>
+              <button onClick={() => signIn('github')} ><RightArrow/></button>
             </div>
-            <button onClick={linkAuthGit}><RightArrow/></button>
-          </div>
+          )}
+
+          {session && (
+            <div className={styles.buttonLogin}>
+              <div>
+                <span>Sair</span>
+              </div>
+              <button onClick={() => signOut} ><RightArrow/></button>
+            </div>
+          )}
+
+          
         </div>
       </div>
   );
