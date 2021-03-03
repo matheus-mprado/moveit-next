@@ -1,8 +1,11 @@
 
+import { useRouter } from 'next/router';
+import {signout} from 'next-auth/client';
+
 import styles from '../styles/components/Sidebar.module.css';
 
 import {FiHome as Home, FiAward as Award, FiLogOut as Logout} from 'react-icons/fi';
-import { useRouter } from 'next/router';
+
 
 
 
@@ -57,7 +60,7 @@ export function Sidebar(){
             </div>
 
             <div className={styles.logout}>
-                <button><Logout/></button>
+                <button onClick={()=>signout()}><Logout/></button>
             </div>
             
         </div>
