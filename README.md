@@ -1,1 +1,4 @@
-<img src="/public/project.jpg" height="100%"/>
+# Move.it
+
+<p align="center"><img src="/public/project.jpg" width="100%"/></p>
+
